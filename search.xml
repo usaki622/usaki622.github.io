@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>test</title>
+    <url>/2023/04/16/test/</url>
+    <content><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这是一篇测试用的博客。</p>
+]]></content>
+      <categories>
+        <category>测试用</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+</search>
