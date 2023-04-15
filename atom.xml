@@ -3,11 +3,11 @@
   <title>usaki622的小站</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://usaki622.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://usaki622.github.io/"/>
   <updated>2023-04-15T16:14:26.394Z</updated>
-  <id>http://example.com/</id>
+  <id>https://usaki622.github.io/</id>
   
   <author>
     <name>usaki</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>test</title>
-    <link href="http://example.com/2023/04/16/test/"/>
-    <id>http://example.com/2023/04/16/test/</id>
+    <link href="https://usaki622.github.io/2023/04/16/test/"/>
+    <id>https://usaki622.github.io/2023/04/16/test/</id>
     <published>2023-04-15T16:12:28.000Z</published>
     <updated>2023-04-15T16:14:26.394Z</updated>
     
@@ -34,12 +34,12 @@
     
     
     
-    <category term="测试用" scheme="http://example.com/categories/%E6%B5%8B%E8%AF%95%E7%94%A8/"/>
+    <category term="测试用" scheme="https://usaki622.github.io/categories/%E6%B5%8B%E8%AF%95%E7%94%A8/"/>
     
     
-    <category term="测试" scheme="http://example.com/tags/%E6%B5%8B%E8%AF%95/"/>
+    <category term="测试" scheme="https://usaki622.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
     
-    <category term="博客" scheme="http://example.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="博客" scheme="https://usaki622.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
