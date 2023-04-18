@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【计网】基础篇-TCP/IP网络模型？</title>
+    <url>/2023/04/18/014001/</url>
+    <content><![CDATA[<h2 id="一、网络模型"><a href="#一、网络模型" class="headerlink" title="一、网络模型"></a>一、网络模型</h2><h3 id="何为网络模型？"><a href="#何为网络模型？" class="headerlink" title="何为网络模型？"></a>何为网络模型？</h3><p>网络模型指的是对计算机网络进行抽象和概括，以便更好地理解网络的工作原理和组成部分。网络模型通常分为两种：<strong>OSI模型和TCP&#x2F;IP模型</strong>。两者都是分层模型，将计算机网络拆分为不同的层次。</p>
+<p>OSI模型由国际标准化组织（ISO）在1984年制定，共分为七层，每一层都有不同的功能和任务，包括物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</p>
+<p>TCP&#x2F;IP模型是互联网所采用的网络模型，由美国国防部的ARPA研究所在20世纪70年代初开始研发。该模型分为四层：网络接口层、网络层、传输层和应用层。</p>
+<p><img src="https://s2.loli.net/2023/04/18/zo2sJtCqibvpVrf.png" style="zoom:50%;" ></img></p>
+<center>网络体系结构图</center>
+
+<h3 id="为何需要网络模型？"><a href="#为何需要网络模型？" class="headerlink" title="为何需要网络模型？"></a>为何需要网络模型？</h3><p>对于同一台设备上的进程间通信，拥有多种方式，如管道、消息队列、共享内存、信号等。但是对于不同设备的进程间通信，就需要进行<strong>网络通信</strong>。而设备本身是多样的，为了兼容多种多样不同的设备，就需要一套<strong>通用的网络协议</strong>。</p>
+<h3 id="为何网络模型都是分层结构？"><a href="#为何网络模型都是分层结构？" class="headerlink" title="为何网络模型都是分层结构？"></a>为何网络模型都是分层结构？</h3><p>简单理解，可以认为计算机网络本身是个很复杂的结构。</p>
+<p>“分层”则可以将庞大而复杂的问题转化为若干较小的局部性问题，从而易于研究和处理。各个层可以进行模块化设计，单独进行实现，而不会干扰别的层，从而提高可维护性。</p>
+<p><em><strong>题外话</strong></em></p>
+<p>事实上，分层思想在计算机领域的应用是相当广泛的，操作系统、数据库、编程语言等领域中也广泛使用了分层思想。比如操作系统中的内核层、驱动层、系统调用层、API层等；数据库中的存储引擎层、查询解析层、事务管理层等；编程语言中的解释器层、编译器层、运行时层等。</p>
+<p>分层的妙处在不断深入学习的过程中，会逐步得到体会。</p>
+<p><img src="https://s2.loli.net/2023/04/18/ckUnDTjvrEb8zqJ.jpg" style="zoom:50%;" ></img></p>
+<p>本文重点探讨一下TCP&#x2F;IP网络模型。TCP&#x2F;IP网络模型是分层的，每一层都有各自的作用和职责，接下来就根据分别对每一层进行介绍。</p>
+<h2 id="二、TCP-x2F-IP网络层"><a href="#二、TCP-x2F-IP网络层" class="headerlink" title="二、TCP&#x2F;IP网络层"></a>二、TCP&#x2F;IP网络层</h2><h3 id="应用层（Application-Layer）"><a href="#应用层（Application-Layer）" class="headerlink" title="应用层（Application Layer）"></a>应用层（Application Layer）</h3><p>应用层在该模型中处于最上层，我们能直接接触到的就属于应用层，它提供了各类应用程序的服务。</p>
+<p>当用户之间需要通信时，应用将应用数据交给下一层，也就是传输层，应用层本身无需去关心数据之间如何传输，只需要专注于提供服务。</p>
+<p>应用层协议包括了许多不同的协议，如<strong>HTTP</strong>、FTP、SMTP、DNS等。这些协议非常重要，以后会详细介绍。</p>
+<p>简而言之，应用层的设计使得不同的应用程序可以独立开发和演化，同时还能够共享TCP&#x2F;IP协议栈提供的通信基础设施，从而使得网络通信更加灵活和高效。</p>
+<h3 id="传输层（Transport-Layer）"><a href="#传输层（Transport-Layer）" class="headerlink" title="传输层（Transport Layer）"></a>传输层（Transport Layer）</h3><p>应用层的报文（Message）会传给传输层，传输层可以为应用层提供网络支持。</p>
+<h4 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h4><p>在TCP&#x2F;IP网络模型中，传输层负责两个重要的传输协议：<strong>传输控制协议（TCP）</strong>和<strong>用户数据报协议（UDP）</strong>。</p>
+<p><em><strong>（挖个坑，关于两者的详细区别可能以后会去写，这里就简单介绍先）</strong></em></p>
+<p>TCP协议是一种<strong>可靠</strong>的<strong>面向连接</strong>的协议，提供了端到端的可靠传输服务。大部分应用都使用了TCP协议，如HTTP应用层协议。TCP相比UDP多了很多特性，比如流量控制、超时重传、拥塞控制等，这些机制保证了数据的完整性、有序性等。TCP连接的建立需要三次握手，连接的释放则需要四次握手。</p>
+<p>UDP协议则是一种<strong>不可靠</strong>的<strong>无连接</strong>协议，它不保证数据的可靠传输。也因此，它的实时性相对更好，传输效率也相对较高。</p>
+<h4 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h4><p>正如前文提到的，传输层会将上层数据封装为报文（Segment或Datagram），并在消息中添加一些必要的控制信息，形成报文，以保证数据的正确传输。</p>
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>在计算机网络中，端口是用于标识进程应用程序所使用的一种抽象地址。我们知道，一台设备上会同时运行着很多不同的应用程序，每个应用程序中又会有很多的进程，为了使不同的进程之间不发生冲突，操作系统就会为每个进程分配一个<strong>独特（？）</strong>的端口号，从而实现不同进程之间的通信。</p>
+<p>（<em><strong>关于端口、端口号、应用程序的深入理解，可能以后会去写</strong></em>）</p>
+<p>传输层中的报文会携带端口号，从而识别出是发送给哪个应用。</p>
+<p><img src="https://s2.loli.net/2023/04/18/Ma6X4JDBY23iTvP.jpg" style="zoom:50%;" ></img></p>
+<h3 id="网络层（Internet-Layer）"><a href="#网络层（Internet-Layer）" class="headerlink" title="网络层（Internet Layer）"></a>网络层（Internet Layer）</h3><p>上文的传输层负责的是传输规则的制定，数据的真正传输实际上是交给网络层的。</p>
+<p>具体来说，网络层负责将传输层传输下来的数据加上IP包头，形成IP数据包（Packet），再根据目的地址将这些数据包发送到下一个网络节点。它会在数据包中加入源和目的地址等信息，以便路由器在将数据包从一个网络节点传输到另一个网络节点时，能够正确地找到下一个节点；同时还会负责<strong>路由选择</strong>，即从多个可用路径中选择一条最佳路径，使得数据包能够快速而可靠地传输。</p>
+<p>在TCP&#x2F;IP中，最常用的协议是IP协议。IP协议是互联网的核心协议，它为上层协议提供<strong>无连接</strong>、<strong>不可靠</strong>的服务。它有两个非常重要的能力：<strong>寻址</strong>和<strong>路由</strong>。</p>
+<p>寻址是为了找到对应的设备，在网络层对设备进行区分的编号为IP地址，可以通过IP地址找到对应的网络和主机。</p>
+<p>路由则是寻找传输的路径，在实际场景中，两台设备之间会通过很多网关、路由器、交换器等设备，从而形成错综复杂的网络路径，路由算法就是每到达一个网络节点后，决定接下来走哪一条路径的。</p>
+<h3 id="网络接口层（Link-Layer）"><a href="#网络接口层（Link-Layer）" class="headerlink" title="网络接口层（Link Layer）"></a>网络接口层（Link Layer）</h3><p>网络接口层是硬件设备与网络之间的接口层，它负责将网络层中的数据包封装成数据帧（Data frame），并通过硬件设备发送到网络上。</p>
+<p>它的主要功能如下：</p>
+<ul>
+<li>定义数据在物理媒介上的传输方式和格式，包括数据的编码解码等；</li>
+<li>通过物理地址（MAC）地址来标识网络上的节点，便于在局域网中进行网络的传输；</li>
+</ul>
+<p>常见的网络接口层协议包括以太网（Ethernet）、WiFi、蓝牙（Bluetooth）等，不同的协议对应不同的物理媒介和传输方式。</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>综上所述，TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层和网络接口层</strong>。</p>
+<p>网络接口层的传输单位是帧（frame），IP 层的传输单位是包（packet），TCP 层的传输单位是段（segment），HTTP 的传输单位则是消息或报文（message）。但这些名词并没有什么本质的区分，可以统称为数据包。</p>
+<p><strong>参考：</strong></p>
+<p><a href="https://xiaolincoding.com/">小林coding (xiaolincoding.com)</a></p>
+<p>各种博客和chatgpt</p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>计网基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>梦开始的地方</title>
     <url>/2023/04/16/00-start/</url>
     <content><![CDATA[<h2 id="这里是世界的起源"><a href="#这里是世界的起源" class="headerlink" title="这里是世界的起源"></a>这里是世界的起源</h2>]]></content>
