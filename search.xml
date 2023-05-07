@@ -6,6 +6,63 @@
     <content><![CDATA[<h2 id="这里是世界的起源"><a href="#这里是世界的起源" class="headerlink" title="这里是世界的起源"></a>这里是世界的起源</h2>]]></content>
   </entry>
   <entry>
+    <title>【计网】基础篇-TCP/IP网络模型？</title>
+    <url>/2023/04/18/014001/</url>
+    <content><![CDATA[<h2 id="一、网络模型"><a href="#一、网络模型" class="headerlink" title="一、网络模型"></a>一、网络模型</h2><h3 id="何为网络模型？"><a href="#何为网络模型？" class="headerlink" title="何为网络模型？"></a>何为网络模型？</h3><p>网络模型指的是对计算机网络进行抽象和概括，以便更好地理解网络的工作原理和组成部分。网络模型通常分为两种：<strong>OSI模型和TCP&#x2F;IP模型</strong>。两者都是分层模型，将计算机网络拆分为不同的层次。</p>
+<p>OSI模型由国际标准化组织（ISO）在1984年制定，共分为七层，每一层都有不同的功能和任务，包括物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</p>
+<p>TCP&#x2F;IP模型是互联网所采用的网络模型，由美国国防部的ARPA研究所在20世纪70年代初开始研发。该模型分为四层：网络接口层、网络层、传输层和应用层。</p>
+<p><img src="https://s2.loli.net/2023/04/18/zo2sJtCqibvpVrf.png" style="zoom:50%;" ></img></p>
+<center>网络体系结构图</center>
+
+<h3 id="为何需要网络模型？"><a href="#为何需要网络模型？" class="headerlink" title="为何需要网络模型？"></a>为何需要网络模型？</h3><p>对于同一台设备上的进程间通信，拥有多种方式，如管道、消息队列、共享内存、信号等。但是对于不同设备的进程间通信，就需要进行<strong>网络通信</strong>。而设备本身是多样的，为了兼容多种多样不同的设备，就需要一套<strong>通用的网络协议</strong>。</p>
+<h3 id="为何网络模型都是分层结构？"><a href="#为何网络模型都是分层结构？" class="headerlink" title="为何网络模型都是分层结构？"></a>为何网络模型都是分层结构？</h3><p>简单理解，可以认为计算机网络本身是个很复杂的结构。</p>
+<p>“分层”则可以将庞大而复杂的问题转化为若干较小的局部性问题，从而易于研究和处理。各个层可以进行模块化设计，单独进行实现，而不会干扰别的层，从而提高可维护性。</p>
+<p><em><strong>题外话</strong></em></p>
+<p>事实上，分层思想在计算机领域的应用是相当广泛的，操作系统、数据库、编程语言等领域中也广泛使用了分层思想。比如操作系统中的内核层、驱动层、系统调用层、API层等；数据库中的存储引擎层、查询解析层、事务管理层等；编程语言中的解释器层、编译器层、运行时层等。</p>
+<p>分层的妙处在不断深入学习的过程中，会逐步得到体会。</p>
+<p><img src="https://s2.loli.net/2023/04/18/ckUnDTjvrEb8zqJ.jpg" style="zoom:50%;" ></img></p>
+<p>本文重点探讨一下TCP&#x2F;IP网络模型。TCP&#x2F;IP网络模型是分层的，每一层都有各自的作用和职责，接下来就根据分别对每一层进行介绍。</p>
+<h2 id="二、TCP-x2F-IP网络层"><a href="#二、TCP-x2F-IP网络层" class="headerlink" title="二、TCP&#x2F;IP网络层"></a>二、TCP&#x2F;IP网络层</h2><h3 id="应用层（Application-Layer）"><a href="#应用层（Application-Layer）" class="headerlink" title="应用层（Application Layer）"></a>应用层（Application Layer）</h3><p>应用层在该模型中处于最上层，我们能直接接触到的就属于应用层，它提供了各类应用程序的服务。</p>
+<p>当用户之间需要通信时，应用将应用数据交给下一层，也就是传输层，应用层本身无需去关心数据之间如何传输，只需要专注于提供服务。</p>
+<p>应用层协议包括了许多不同的协议，如<strong>HTTP</strong>、FTP、SMTP、DNS等。这些协议非常重要，以后会详细介绍。</p>
+<p>简而言之，应用层的设计使得不同的应用程序可以独立开发和演化，同时还能够共享TCP&#x2F;IP协议栈提供的通信基础设施，从而使得网络通信更加灵活和高效。</p>
+<h3 id="传输层（Transport-Layer）"><a href="#传输层（Transport-Layer）" class="headerlink" title="传输层（Transport Layer）"></a>传输层（Transport Layer）</h3><p>应用层的报文（Message）会传给传输层，传输层可以为应用层提供网络支持。</p>
+<h4 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h4><p>在TCP&#x2F;IP网络模型中，传输层负责两个重要的传输协议：<strong>传输控制协议（TCP）</strong>和<strong>用户数据报协议（UDP）</strong>。</p>
+<p><em><strong>（挖个坑，关于两者的详细区别可能以后会去写，这里就简单介绍先）</strong></em></p>
+<p>TCP协议是一种<strong>可靠</strong>的<strong>面向连接</strong>的协议，提供了端到端的可靠传输服务。大部分应用都使用了TCP协议，如HTTP应用层协议。TCP相比UDP多了很多特性，比如流量控制、超时重传、拥塞控制等，这些机制保证了数据的完整性、有序性等。TCP连接的建立需要三次握手，连接的释放则需要四次握手。</p>
+<p>UDP协议则是一种<strong>不可靠</strong>的<strong>无连接</strong>协议，它不保证数据的可靠传输。也因此，它的实时性相对更好，传输效率也相对较高。</p>
+<h4 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h4><p>正如前文提到的，传输层会将上层数据封装为报文（Segment或Datagram），并在消息中添加一些必要的控制信息，形成报文，以保证数据的正确传输。</p>
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>在计算机网络中，端口是用于标识进程应用程序所使用的一种抽象地址。我们知道，一台设备上会同时运行着很多不同的应用程序，每个应用程序中又会有很多的进程，为了使不同的进程之间不发生冲突，操作系统就会为每个进程分配一个<strong>独特（？）</strong>的端口号，从而实现不同进程之间的通信。</p>
+<p>（<em><strong>关于端口、端口号、应用程序的深入理解，可能以后会去写</strong></em>）</p>
+<p>传输层中的报文会携带端口号，从而识别出是发送给哪个应用。</p>
+<p><img src="https://s2.loli.net/2023/04/18/Ma6X4JDBY23iTvP.jpg" style="zoom:50%;" ></img></p>
+<h3 id="网络层（Internet-Layer）"><a href="#网络层（Internet-Layer）" class="headerlink" title="网络层（Internet Layer）"></a>网络层（Internet Layer）</h3><p>上文的传输层负责的是传输规则的制定，数据的真正传输实际上是交给网络层的。</p>
+<p>具体来说，网络层负责将传输层传输下来的数据加上IP包头，形成IP数据包（Packet），再根据目的地址将这些数据包发送到下一个网络节点。它会在数据包中加入源和目的地址等信息，以便路由器在将数据包从一个网络节点传输到另一个网络节点时，能够正确地找到下一个节点；同时还会负责<strong>路由选择</strong>，即从多个可用路径中选择一条最佳路径，使得数据包能够快速而可靠地传输。</p>
+<p>在TCP&#x2F;IP中，最常用的协议是IP协议。IP协议是互联网的核心协议，它为上层协议提供<strong>无连接</strong>、<strong>不可靠</strong>的服务。它有两个非常重要的能力：<strong>寻址</strong>和<strong>路由</strong>。</p>
+<p>寻址是为了找到对应的设备，在网络层对设备进行区分的编号为IP地址，可以通过IP地址找到对应的网络和主机。</p>
+<p>路由则是寻找传输的路径，在实际场景中，两台设备之间会通过很多网关、路由器、交换器等设备，从而形成错综复杂的网络路径，路由算法就是每到达一个网络节点后，决定接下来走哪一条路径的。</p>
+<h3 id="网络接口层（Link-Layer）"><a href="#网络接口层（Link-Layer）" class="headerlink" title="网络接口层（Link Layer）"></a>网络接口层（Link Layer）</h3><p>网络接口层是硬件设备与网络之间的接口层，它负责将网络层中的数据包封装成数据帧（Data frame），并通过硬件设备发送到网络上。</p>
+<p>它的主要功能如下：</p>
+<ul>
+<li>定义数据在物理媒介上的传输方式和格式，包括数据的编码解码等；</li>
+<li>通过物理地址（MAC）地址来标识网络上的节点，便于在局域网中进行网络的传输；</li>
+</ul>
+<p>常见的网络接口层协议包括以太网（Ethernet）、WiFi、蓝牙（Bluetooth）等，不同的协议对应不同的物理媒介和传输方式。</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>综上所述，TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层和网络接口层</strong>。</p>
+<p>网络接口层的传输单位是帧（frame），IP 层的传输单位是包（packet），TCP 层的传输单位是段（segment），HTTP 的传输单位则是消息或报文（message）。但这些名词并没有什么本质的区分，可以统称为数据包。</p>
+<p><strong>参考：</strong></p>
+<p><a href="https://xiaolincoding.com/">小林coding (xiaolincoding.com)</a></p>
+<p>各种博客和chatgpt</p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>计网基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【左神】01-贪心算法深度剖析</title>
     <url>/2023/04/18/016001/</url>
     <content><![CDATA[<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><p>可以认为，贪心算法是一种<strong>最为贴合自然智慧</strong>的算法。也就是说，贪心算法有时候表现上就是一种常识性的推导，这使得你即使使用了贪心算法通过了题目，也无法意识到自己其实使用了贪心算法。</p>
@@ -42,6 +99,233 @@
       <tags>
         <tag>算法</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>【仿B站项目】01-从搭建环境开始</title>
+    <url>/2023/05/07/017001/</url>
+    <content><![CDATA[<h2 id="一、项目架构讲解"><a href="#一、项目架构讲解" class="headerlink" title="一、项目架构讲解"></a>一、项目架构讲解</h2><h3 id="（一）业务（功能）架构"><a href="#（一）业务（功能）架构" class="headerlink" title="（一）业务（功能）架构"></a>（一）业务（功能）架构</h3><ul>
+<li>顶层：用户服务，如注册登录、大会员权限、查找感兴趣视频等；</li>
+<li>中间层：在线视频流播放 + 实时弹幕；</li>
+<li>底层：管理后台，如视频上传、数据统计、系统消息推送等</li>
+</ul>
+<p><em><strong>其实我没看懂这是按什么标准分的……</strong></em></p>
+<h3 id="（二）技术架构"><a href="#（二）技术架构" class="headerlink" title="（二）技术架构"></a>（二）技术架构</h3><ul>
+<li>技术选型：SpringBoot2.x + MySql + MyBatis + Maven</li>
+<li>开发模式：项目采用经典MVC，控制层（Controller层）、服务层（Service层）、数据层（Dao层）</li>
+</ul>
+<h3 id="（三）部署架构"><a href="#（三）部署架构" class="headerlink" title="（三）部署架构"></a>（三）部署架构</h3><ul>
+<li>前端：服务转发 + 负载均衡</li>
+</ul>
+<p>服务转发：就是将前端接收到的请求转移给后端服务器；</p>
+<p>负载均衡：当请求的数量比较大的时候，按照某种特定的规则，有规律地转发用户的请求，防止服务器负载过高影响效率甚至崩溃。</p>
+<ul>
+<li>后端：业务处理 + 功能实现</li>
+<li>工具：缓存、队列等</li>
+</ul>
+<h2 id="二、开发环境说明"><a href="#二、开发环境说明" class="headerlink" title="二、开发环境说明"></a>二、开发环境说明</h2><h3 id="（一）开发环境"><a href="#（一）开发环境" class="headerlink" title="（一）开发环境"></a>（一）开发环境</h3><ul>
+<li>操作系统：Linux&#x2F;Mac&#x2F;Windows均可</li>
+</ul>
+<p><em><strong>因为本项目使用Java语言，Java语言的一大特性就是跨平台</strong></em></p>
+<ul>
+<li>开发工具：IntelliJ IDEA，推荐版本2018以后</li>
+<li>必备：JDK1.8、Maven</li>
+</ul>
+<h3 id="（二）创建多模块、多环境项目"><a href="#（二）创建多模块、多环境项目" class="headerlink" title="（二）创建多模块、多环境项目"></a>（二）创建多模块、多环境项目</h3><ul>
+<li>多模块：创建MVC模式多模块项目，控制层（Controller层）、服务层（Service层）、数据层（Dao层）</li>
+</ul>
+<p><em><strong>如下图所示，将控制层、服务层、数据层分为不同的子模块。根据查阅的资料（Chatgpt）显示，这也是一种常见的分层方式</strong></em></p>
+<img src="https://s2.loli.net/2023/05/07/Qi8Z4yJSeD3THjm.png" style="zoom:33%;" >
+
+<ul>
+<li>多环境：添加不同环境的properties配置文件</li>
+</ul>
+<p><em><strong>基于个人习惯，我使用了yml配置文件。在不同模块下的resource文件夹中都新建配置文件即可</strong></em></p>
+<ul>
+<li>在IDEA中配置JDK和Maven</li>
+</ul>
+<h2 id="三、正式开始运行"><a href="#三、正式开始运行" class="headerlink" title="三、正式开始运行"></a>三、正式开始运行</h2><h3 id="（一）运行项目"><a href="#（一）运行项目" class="headerlink" title="（一）运行项目"></a>（一）运行项目</h3><ul>
+<li><strong>在pom文件里引入SpringBoot框架相关依赖</strong></li>
+</ul>
+<p>只需要在最顶层的pom.xml引入即可</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在子模块pom文件中添加模块间依赖关系</strong></li>
+</ul>
+<p>controller层依赖于service层，service层又依赖于dao层，所以在各自的pom文件中添加依赖。</p>
+<p>controller层中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>bilibili-service<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>service层中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>bilibili-dao<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>添加启动入口，启动项目</strong></li>
+</ul>
+<p>在controller中添加入口类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">bilibiliApp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">app</span> <span class="operator">=</span> SpringApplication.run(bilibiliApp.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而后就可以开始运行看看效果了！</p>
+<h3 id="（二）搭建数据库与持久层框架"><a href="#（二）搭建数据库与持久层框架" class="headerlink" title="（二）搭建数据库与持久层框架"></a>（二）搭建数据库与持久层框架</h3><p><em><strong>我也不知道为什么这个放在这一章节，但为了方便查阅，该笔记依照课程目录顺序来</strong></em></p>
+<ul>
+<li>数据库：选用MySQL，特点是：体积小、速度快、开源</li>
+</ul>
+<p>引入相关依赖，再在配置文件里做好数据库的相关配置即可。这里暂时还没有完成数据库表设计，所以可以先打好框架，不着急。</p>
+<ul>
+<li>持久层框架：MyBatis，特点是：XML形式管理、支持动态SQL</li>
+</ul>
+<p>同样的，引入相关依赖后，再做好相关配置即可。</p>
+<p>两者引入依赖如下，在总的pom文件中引入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.28<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="（三）实现热部署"><a href="#（三）实现热部署" class="headerlink" title="（三）实现热部署"></a>（三）实现热部署</h3><p>根据chatgpt说法：</p>
+<blockquote>
+<p>热部署是指在不重启服务器的情况下，修改代码后立即生效。虽然热部署在开发和测试阶段能够提高效率，但是它也存在一些坏处，包括：</p>
+<ol>
+<li>系统稳定性：热部署过程中，应用程序和服务器的状态可能会出现不一致的情况，从而导致系统崩溃或无法正常工作。</li>
+<li>安全性：热部署使得修改后的代码立即生效，这可能会导致系统中的安全漏洞被利用。</li>
+<li>维护难度：热部署使得应用程序的代码处于不稳定的状态，这可能会导致在维护过程中出现意外错误或者难以排除的问题。</li>
+<li>性能：热部署会增加系统的开销，因为在热部署过程中，需要重新加载类和资源，这会增加系统的负载和响应时间。</li>
+</ol>
+<p>因此，在生产环境中，一般不建议使用热部署功能，而应该采用传统的重启方式来更新应用程序。</p>
+</blockquote>
+<p>因此，本人决定不使用热部署。</p>
+]]></content>
+      <categories>
+        <category>项目-仿B站</category>
+      </categories>
+      <tags>
+        <tag>仿B站项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【仿B站项目】番外01-RESTful规范简单理解</title>
+    <url>/2023/05/07/017003/</url>
+    <content><![CDATA[<h2 id="一、什么是API（应用程序接口）"><a href="#一、什么是API（应用程序接口）" class="headerlink" title="一、什么是API（应用程序接口）"></a>一、什么是API（应用程序接口）</h2><p>Application Programming Interface（API），指的是一些软件或服务的接口，它们允许开发者通过一定的方式和规则来访问这些软件或服务的功能。你可以将API想象成一个服务窗口，你可以向窗口提出请求，获取你需要的信息或功能。比如，当你在使用一个手机App时，你通过API访问App的各种功能和信息，比如用户信息、位置信息、社交网络等等，而无需知道内部原理。</p>
+<p>API拥有一系列好处，在我们长期的学习过程中，会有越来越深的体会。</p>
+<h2 id="二、传统模式与前后端分离模式对比"><a href="#二、传统模式与前后端分离模式对比" class="headerlink" title="二、传统模式与前后端分离模式对比"></a>二、传统模式与前后端分离模式对比</h2><h3 id="（一）传统开发模式"><a href="#（一）传统开发模式" class="headerlink" title="（一）传统开发模式"></a>（一）传统开发模式</h3><p>传统模式指的是将前端和后端应用程序集成在同一个应用程序中。在这种模式下，前端和后端共享同一个代码库和同一个服务器，前端通过模板引擎或者JSP等技术将数据渲染到页面上。这种模式的优点是开发和部署相对简单，但是由于前端和后端紧密耦合，当一个组件发生变化时，需要重新编译和部署整个应用程序，增加了维护成本。</p>
+<h3 id="（二）前后端分离模式"><a href="#（二）前后端分离模式" class="headerlink" title="（二）前后端分离模式"></a>（二）前后端分离模式</h3><p>前后端分离模式则将前端和后端分别开发，前端通过API请求后端的数据并将其渲染到页面上。在这种模式下，前端和后端完全解耦，可以分别进行独立的开发和维护，而且前端开发人员可以专注于用户界面和用户体验，而后端开发人员可以专注于数据处理和业务逻辑。这种模式的优点是更容易扩展、更易于维护和更加灵活，但是需要更多的开发和部署工作。</p>
+<p><em><strong>前面都是一点点铺垫，了解一下常见的开发模式和API，下面开始正式介绍。</strong></em></p>
+<h2 id="三、RESTful"><a href="#三、RESTful" class="headerlink" title="三、RESTful"></a>三、RESTful</h2><h3 id="（一）RESTful基本认知"><a href="#（一）RESTful基本认知" class="headerlink" title="（一）RESTful基本认知"></a>（一）RESTful基本认知</h3><p>RESTful（Representational State Transfer）是一种网络应用程序的设计风格和开发方式，基于 HTTP ，可以使用 XML 格式定义或 JSON 格式定义。</p>
+<p><strong>注意：</strong>RESTful只是一种接口设计风格。如果一个接口的url和参数符合REST原则，就称它为RESTful设计风格，如果一个接口的URL和参数不符合REST原则，就称它不符合RESTful设计风格。但是，<strong>不符合RESTful设计风格并不是错误的设计</strong>，对于一个后台接口来说，只要功能可以正常使用，URL和参数的设计没有固定法则。然而在实际开发中，RESTful风格已经得到了广泛使用。</p>
+<img src="https://s2.loli.net/2023/05/07/wksN8c6gHIotCjV.jpg" style="zoom:50%;" >
+
+
+
+<h3 id="（二）从名称上彻底理解RESTful"><a href="#（二）从名称上彻底理解RESTful" class="headerlink" title="（二）从名称上彻底理解RESTful"></a>（二）从名称上彻底理解RESTful</h3><h4 id="1-资源（Resources）"><a href="#1-资源（Resources）" class="headerlink" title="1.资源（Resources）"></a>1.资源（Resources）</h4><p>RESTful的中文是表现层状态转化。这里的主语被隐含了，实际上是<strong>资源</strong>，而在Web开发中这个资源指的就是URI。</p>
+<p>所谓”资源”，就是网络上的一个实体，或者说是网络上的一个具体信息。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
+<h4 id="2-表现层（Representation）"><a href="#2-表现层（Representation）" class="headerlink" title="2.表现层（Representation）"></a>2.表现层（Representation）</h4><p>“资源”是一种信息实体，它可以有多种外在表现形式。<strong>我们把”资源”具体呈现出来的形式，叫做它的”表现层”（Representation）</strong>。</p>
+<p><em>比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。</em></p>
+<p>URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的”.html”后缀名是不必要的，因为这个后缀名表示格式，属于”表现层”范畴，而URI应该只代表”资源”的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对”表现层”的描述。</p>
+<h4 id="3-状态转化（State-Transfer）"><a href="#3-状态转化（State-Transfer）" class="headerlink" title="3.状态转化（State Transfer）"></a>3.状态转化（State Transfer）</h4><p>访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。</p>
+<p>互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”。</p>
+<p>客户端用到的手段，只能是HTTP协议。具体来说，常用的就是HTTP协议里面，五个表示操作方式的动词：GET、POST、PUT、PATCH、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，PATCH也用于更新资源（具体差异见后文），DELETE用来删除资源。</p>
+<img src="https://s2.loli.net/2023/05/07/O8RoiVNxZJ3kfse.jpg" style="zoom:50%;" >
+
+
+
+<h3 id="（三）Restful风格究竟是什么？"><a href="#（三）Restful风格究竟是什么？" class="headerlink" title="（三）Restful风格究竟是什么？"></a>（三）Restful风格究竟是什么？</h3><p><strong>在请求层面</strong>，REST 规范可以简单粗暴抽象成以下两个规则：</p>
+<ol>
+<li><p>请求 API 的 URI 表示用来定位资源；</p>
+</li>
+<li><p>请求的 METHOD 表示对这个资源进行的操作；</p>
+</li>
+</ol>
+<h4 id="（四）具体规范"><a href="#（四）具体规范" class="headerlink" title="（四）具体规范"></a>（四）具体规范</h4><h5 id="1-API请求的路径"><a href="#1-API请求的路径" class="headerlink" title="1.API请求的路径"></a>1.API请求的路径</h5><ul>
+<li>命名必须全部<strong>小写</strong></li>
+<li>资源（resource）的命名必须是<strong>名词</strong>，并且必须是<strong>复数形式</strong></li>
+<li>如果要使用连字符，建议使用‘-’而不是‘_’，‘_’字符可能会在某些浏览器或屏幕中被部分遮挡或完全隐藏</li>
+<li>易读</li>
+</ul>
+<p>命名必须全部小写和易读都无需解释，可以理解为规定，那么为什么命名必须是名词且需要复数形式呢？这是因为在RESTful中，主语是资源，资源肯定是名词，不能是动词。其次，一个资源往往对应数据库中一张表，表就是实体的集合，因此需要是复数形式。</p>
+<p>下面是一些反例：</p>
+<ul>
+<li>api.example.com&#x2F;getUser</li>
+<li>api.example.com&#x2F;addUser</li>
+</ul>
+<p>下面是一些正例：</p>
+<ul>
+<li>api.example.com&#x2F;zoos</li>
+<li>api.example.com&#x2F;zoos&#x2F;anim…</li>
+</ul>
+<h5 id="2-API请求的方法"><a href="#2-API请求的方法" class="headerlink" title="2.API请求的方法"></a>2.API请求的方法</h5><p>对于如何操作资源，有相应的HTTP方法对应，常见的方法有如下五个（括号里表示SQL对应的命令）：</p>
+<ul>
+<li>GET（SELECT）：从服务器取出资源（一项或多项）</li>
+<li>POST（CREATE）：在服务器新建一个资源</li>
+<li>PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）</li>
+<li>PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）</li>
+<li>DELETE（DELETE）：从服务器删除资源</li>
+</ul>
+<p>示例：</p>
+<table>
+<thead>
+<tr>
+<th>HTTP方法</th>
+<th>路径</th>
+<th>表述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>&#x2F;zoos</td>
+<td>获取所有动物园信息</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>&#x2F;zoos</td>
+<td>新建一个动物园</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>&#x2F;zoos&#x2F;ID</td>
+<td>获取指定动物园的信息</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>&#x2F;zoos&#x2F;ID</td>
+<td>更新指定动物园的信息（前端提供该动物园的全部信息）</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>&#x2F;zoos&#x2F;ID</td>
+<td>更新某个指定动物园的信息（提供该动物园改动部分的信息）</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>&#x2F;zoos&#x2F;ID</td>
+<td>删除某个动物园</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>&#x2F;zoos&#x2F;ID&#x2F;animals</td>
+<td>获取某个动物园里面的所有动物信息</td>
+</tr>
+</tbody></table>
+<p>关于这些方法具体差异，这里暂时不作深入介绍。</p>
+<p><strong>实际上，RESTful的规范远不止如此</strong>，上面只是列出了我目前在开发中可能会用到的。关于更多RESTful的规范，请参考<a href="https://github.com/aisuhua/restful-api-design-references">这个仓库</a>。</p>
+<p>参考：</p>
+<p>[1]<a href="https://blog.csdn.net/zzvar/article/details/118164133">RESTful 风格（详细介绍 + 案例实现）_Yan Yang的博客-CSDN博客</a></p>
+<p>[2]<a href="https://zhuanlan.zhihu.com/p/338076868">谈一谈Restful接口设计风格 - 知乎 (zhihu.com)</a></p>
+<p>[3]<a href="https://juejin.cn/post/7025222833798119454#heading-3">RESTful API 设计规范 - 掘金 (juejin.cn)</a></p>
+]]></content>
+      <categories>
+        <category>项目-仿B站</category>
+      </categories>
+      <tags>
+        <tag>仿B站项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/05/07/017002/</url>
+    <content><![CDATA[<p>本章节我们从用户体验出发，通过对于用户模块的开发，体验经典的后端开发设计。</p>
+<h2 id="一、开发概要"><a href="#一、开发概要" class="headerlink" title="一、开发概要"></a>一、开发概要</h2><h3 id="（一）RestFul风格"><a href="#（一）RestFul风格" class="headerlink" title="（一）RestFul风格"></a>（一）RestFul风格</h3><p>关于RestFul风格的具体介绍，请移步我另一篇博客：</p>
+<p>（二）</p>
+]]></content>
   </entry>
   <entry>
     <title>【文学理论-杨宁】【01】绪论：何为文学理论？</title>
@@ -137,60 +421,84 @@
       </tags>
   </entry>
   <entry>
-    <title>【计网】基础篇-TCP/IP网络模型？</title>
-    <url>/2023/04/18/014001/</url>
-    <content><![CDATA[<h2 id="一、网络模型"><a href="#一、网络模型" class="headerlink" title="一、网络模型"></a>一、网络模型</h2><h3 id="何为网络模型？"><a href="#何为网络模型？" class="headerlink" title="何为网络模型？"></a>何为网络模型？</h3><p>网络模型指的是对计算机网络进行抽象和概括，以便更好地理解网络的工作原理和组成部分。网络模型通常分为两种：<strong>OSI模型和TCP&#x2F;IP模型</strong>。两者都是分层模型，将计算机网络拆分为不同的层次。</p>
-<p>OSI模型由国际标准化组织（ISO）在1984年制定，共分为七层，每一层都有不同的功能和任务，包括物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</p>
-<p>TCP&#x2F;IP模型是互联网所采用的网络模型，由美国国防部的ARPA研究所在20世纪70年代初开始研发。该模型分为四层：网络接口层、网络层、传输层和应用层。</p>
-<p><img src="https://s2.loli.net/2023/04/18/zo2sJtCqibvpVrf.png" style="zoom:50%;" ></img></p>
-<center>网络体系结构图</center>
-
-<h3 id="为何需要网络模型？"><a href="#为何需要网络模型？" class="headerlink" title="为何需要网络模型？"></a>为何需要网络模型？</h3><p>对于同一台设备上的进程间通信，拥有多种方式，如管道、消息队列、共享内存、信号等。但是对于不同设备的进程间通信，就需要进行<strong>网络通信</strong>。而设备本身是多样的，为了兼容多种多样不同的设备，就需要一套<strong>通用的网络协议</strong>。</p>
-<h3 id="为何网络模型都是分层结构？"><a href="#为何网络模型都是分层结构？" class="headerlink" title="为何网络模型都是分层结构？"></a>为何网络模型都是分层结构？</h3><p>简单理解，可以认为计算机网络本身是个很复杂的结构。</p>
-<p>“分层”则可以将庞大而复杂的问题转化为若干较小的局部性问题，从而易于研究和处理。各个层可以进行模块化设计，单独进行实现，而不会干扰别的层，从而提高可维护性。</p>
-<p><em><strong>题外话</strong></em></p>
-<p>事实上，分层思想在计算机领域的应用是相当广泛的，操作系统、数据库、编程语言等领域中也广泛使用了分层思想。比如操作系统中的内核层、驱动层、系统调用层、API层等；数据库中的存储引擎层、查询解析层、事务管理层等；编程语言中的解释器层、编译器层、运行时层等。</p>
-<p>分层的妙处在不断深入学习的过程中，会逐步得到体会。</p>
-<p><img src="https://s2.loli.net/2023/04/18/ckUnDTjvrEb8zqJ.jpg" style="zoom:50%;" ></img></p>
-<p>本文重点探讨一下TCP&#x2F;IP网络模型。TCP&#x2F;IP网络模型是分层的，每一层都有各自的作用和职责，接下来就根据分别对每一层进行介绍。</p>
-<h2 id="二、TCP-x2F-IP网络层"><a href="#二、TCP-x2F-IP网络层" class="headerlink" title="二、TCP&#x2F;IP网络层"></a>二、TCP&#x2F;IP网络层</h2><h3 id="应用层（Application-Layer）"><a href="#应用层（Application-Layer）" class="headerlink" title="应用层（Application Layer）"></a>应用层（Application Layer）</h3><p>应用层在该模型中处于最上层，我们能直接接触到的就属于应用层，它提供了各类应用程序的服务。</p>
-<p>当用户之间需要通信时，应用将应用数据交给下一层，也就是传输层，应用层本身无需去关心数据之间如何传输，只需要专注于提供服务。</p>
-<p>应用层协议包括了许多不同的协议，如<strong>HTTP</strong>、FTP、SMTP、DNS等。这些协议非常重要，以后会详细介绍。</p>
-<p>简而言之，应用层的设计使得不同的应用程序可以独立开发和演化，同时还能够共享TCP&#x2F;IP协议栈提供的通信基础设施，从而使得网络通信更加灵活和高效。</p>
-<h3 id="传输层（Transport-Layer）"><a href="#传输层（Transport-Layer）" class="headerlink" title="传输层（Transport Layer）"></a>传输层（Transport Layer）</h3><p>应用层的报文（Message）会传给传输层，传输层可以为应用层提供网络支持。</p>
-<h4 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h4><p>在TCP&#x2F;IP网络模型中，传输层负责两个重要的传输协议：<strong>传输控制协议（TCP）</strong>和<strong>用户数据报协议（UDP）</strong>。</p>
-<p><em><strong>（挖个坑，关于两者的详细区别可能以后会去写，这里就简单介绍先）</strong></em></p>
-<p>TCP协议是一种<strong>可靠</strong>的<strong>面向连接</strong>的协议，提供了端到端的可靠传输服务。大部分应用都使用了TCP协议，如HTTP应用层协议。TCP相比UDP多了很多特性，比如流量控制、超时重传、拥塞控制等，这些机制保证了数据的完整性、有序性等。TCP连接的建立需要三次握手，连接的释放则需要四次握手。</p>
-<p>UDP协议则是一种<strong>不可靠</strong>的<strong>无连接</strong>协议，它不保证数据的可靠传输。也因此，它的实时性相对更好，传输效率也相对较高。</p>
-<h4 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h4><p>正如前文提到的，传输层会将上层数据封装为报文（Segment或Datagram），并在消息中添加一些必要的控制信息，形成报文，以保证数据的正确传输。</p>
-<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>在计算机网络中，端口是用于标识进程应用程序所使用的一种抽象地址。我们知道，一台设备上会同时运行着很多不同的应用程序，每个应用程序中又会有很多的进程，为了使不同的进程之间不发生冲突，操作系统就会为每个进程分配一个<strong>独特（？）</strong>的端口号，从而实现不同进程之间的通信。</p>
-<p>（<em><strong>关于端口、端口号、应用程序的深入理解，可能以后会去写</strong></em>）</p>
-<p>传输层中的报文会携带端口号，从而识别出是发送给哪个应用。</p>
-<p><img src="https://s2.loli.net/2023/04/18/Ma6X4JDBY23iTvP.jpg" style="zoom:50%;" ></img></p>
-<h3 id="网络层（Internet-Layer）"><a href="#网络层（Internet-Layer）" class="headerlink" title="网络层（Internet Layer）"></a>网络层（Internet Layer）</h3><p>上文的传输层负责的是传输规则的制定，数据的真正传输实际上是交给网络层的。</p>
-<p>具体来说，网络层负责将传输层传输下来的数据加上IP包头，形成IP数据包（Packet），再根据目的地址将这些数据包发送到下一个网络节点。它会在数据包中加入源和目的地址等信息，以便路由器在将数据包从一个网络节点传输到另一个网络节点时，能够正确地找到下一个节点；同时还会负责<strong>路由选择</strong>，即从多个可用路径中选择一条最佳路径，使得数据包能够快速而可靠地传输。</p>
-<p>在TCP&#x2F;IP中，最常用的协议是IP协议。IP协议是互联网的核心协议，它为上层协议提供<strong>无连接</strong>、<strong>不可靠</strong>的服务。它有两个非常重要的能力：<strong>寻址</strong>和<strong>路由</strong>。</p>
-<p>寻址是为了找到对应的设备，在网络层对设备进行区分的编号为IP地址，可以通过IP地址找到对应的网络和主机。</p>
-<p>路由则是寻找传输的路径，在实际场景中，两台设备之间会通过很多网关、路由器、交换器等设备，从而形成错综复杂的网络路径，路由算法就是每到达一个网络节点后，决定接下来走哪一条路径的。</p>
-<h3 id="网络接口层（Link-Layer）"><a href="#网络接口层（Link-Layer）" class="headerlink" title="网络接口层（Link Layer）"></a>网络接口层（Link Layer）</h3><p>网络接口层是硬件设备与网络之间的接口层，它负责将网络层中的数据包封装成数据帧（Data frame），并通过硬件设备发送到网络上。</p>
-<p>它的主要功能如下：</p>
+    <title>【文学理论-杨宁】【02】文学本质论：文学是什么？</title>
+    <url>/2023/04/25/031002/</url>
+    <content><![CDATA[<p>文学是什么？文学和非文学的界限在哪里？</p>
+<p>这是一个元问题，实际上是极为复杂的。</p>
+<h2 id="一、文学的本质主义与反本质主义"><a href="#一、文学的本质主义与反本质主义" class="headerlink" title="一、文学的本质主义与反本质主义"></a>一、文学的本质主义与反本质主义</h2><p><strong>本质主义：</strong>现象背后有本质 <font color=#87CEEB>苹果在生物学上本质为水果 彩虹现象背后本质是光的折射</font></p>
+<p><strong>反本质主义：</strong>现象背后无本质</p>
+<p><font color=#87CEEB>梨花体的诗是否为诗？新闻稿是否为文学？</font></p>
+<p><font color=#87CEEB>我把一句话读成诗，它就是诗；读成文学，它就是文学。对现象追问本质就如同剥洋葱，剥到最后一无所有，因此现象背后无本质。</font></p>
+<p><strong>本质：</strong>一个事物存在的依据，即这个事物区别于另一个事物的本质的特性。</p>
+<p>强调：<strong>反本质不等于无本质！</strong></p>
+<p><font color=#FF9911>反本质反的是教条式的本质，想要用一句话概括文学的本质，是不可能的。但是，例如我把一篇演讲稿看为文学，另一个人不看为文学，我看为文学的原因背后是有本质的，另一个人背后也是有他的本质的，我们区分看的原因也是有本质的。</font></p>
+<p>（<em><strong>说实话我没有听太懂，个人理解意思是反本质反的是统一的本质，本质是因人而异的？</strong></em>）</p>
+<p>杨宁老师指出，文学本质绝不是一言以蔽之能够概括的，尽管所有文学理论教材都在尝试这一点，但一定都存在漏洞。这里探讨一个概念，<font color=#00C957>文学性，即使得文学作品成为文学的特性（提出者：俄国形式主义者雅各布森）</font></p>
+<h2 id="二、文学性"><a href="#二、文学性" class="headerlink" title="二、文学性"></a>二、文学性</h2><h3 id="（一）文学的存在方式-——-物质性存在与精神性存在"><a href="#（一）文学的存在方式-——-物质性存在与精神性存在" class="headerlink" title="（一）文学的存在方式 —— 物质性存在与精神性存在"></a>（一）文学的存在方式 —— 物质性存在与精神性存在</h3><p>文学作品是一种<strong>精神性存在</strong>，而非物质性存在。</p>
+<p><font color=#87CEEB>例如口头文学，口传心授，不存在载体。</font></p>
+<p><font color=#87CEEB>例如将一个作品的所有载体（书籍、电子）都毁掉，这作品仍然是存在的。</font></p>
+<p>（<em><strong>emmmm，这地方感觉有点玄其实，老师讲的似乎更贴近于物理载体，而不是语言这些具体的传播手段</strong></em>）</p>
+<h3 id="（二）文学性的四个维度"><a href="#（二）文学性的四个维度" class="headerlink" title="（二）文学性的四个维度"></a>（二）文学性的四个维度</h3><p>前文说到文学无法以一句话概括，为了界定文学，我们可以试图去找一个大概的参考系，划定一个大概的范围，这就是文学性的四个维度。</p>
+<h4 id="1-维度一：审美、文化"><a href="#1-维度一：审美、文化" class="headerlink" title="1.维度一：审美、文化"></a>1.维度一：审美、文化</h4><p>文学属于文化的一部分，这一点无须赘述。</p>
+<p>审美：审美是人类把握世界的一种方式</p>
+<p>真、善、美是人类把握世界的三种方式，但是我们把文学定义在美上，而不定义在真和善上。下面探讨一下。</p>
+<h5 id="（1）文学与真"><a href="#（1）文学与真" class="headerlink" title="（1）文学与真"></a>（1）文学与真</h5><p>艺术真实不等于生活真实。文学追求的是<strong>真实感</strong>，而非与现实完全贴合。与现实完全贴合有时反而没意思。<strong>文学不求真！</strong></p>
+<p><font color=#87CEEB>比起《三国志》，《三国演义》更加吸引人。</font></p>
+<h5 id="（2）文学与善"><a href="#（2）文学与善" class="headerlink" title="（2）文学与善"></a>（2）文学与善</h5><p>文学作品不求善，甚至是挑战道德的。试想一下，在古今中外的经典名著里，有几个主人公是有着高尚的道德的？</p>
 <ul>
-<li>定义数据在物理媒介上的传输方式和格式，包括数据的编码解码等；</li>
-<li>通过物理地址（MAC）地址来标识网络上的节点，便于在局域网中进行网络的传输；</li>
+<li><font color=#87CEEB>《安娜·卡列尼娜》，主人公出轨；</font></li>
+<li><font color=#87CEEB>《洛丽塔》，炼铜+乱伦，却是世界名著；</font></li>
+<li>这样的例子数不胜数……</li>
 </ul>
-<p>常见的网络接口层协议包括以太网（Ethernet）、WiFi、蓝牙（Bluetooth）等，不同的协议对应不同的物理媒介和传输方式。</p>
-<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>综上所述，TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层和网络接口层</strong>。</p>
-<p>网络接口层的传输单位是帧（frame），IP 层的传输单位是包（packet），TCP 层的传输单位是段（segment），HTTP 的传输单位则是消息或报文（message）。但这些名词并没有什么本质的区分，可以统称为数据包。</p>
-<p><strong>参考：</strong></p>
-<p><a href="https://xiaolincoding.com/">小林coding (xiaolincoding.com)</a></p>
-<p>各种博客和chatgpt</p>
+<p>文学绝不是以善为最高目的，而是以美为最高目的。美是一个人最终的需求，美是一个人光辉的体现。</p>
+<h5 id="（3）文学与美"><a href="#（3）文学与美" class="headerlink" title="（3）文学与美"></a>（3）文学与美</h5><p><strong>美学：</strong>一门学科     <strong>审美</strong>：一种活动</p>
+<p><font color=#DA70D6>美的本质：无功利性</font></p>
+<p><font color=#FF9911>什么叫无功利性？朱光潜的《谈美》中提到，比如三个人，科学家、商人和画家，三个人看到一棵古木。科学家会想着古木的分类，商人会想着如何挖掘其价值，画家则会将其画下来。前两者都是想着如何将古木为我所用，画家则是一种审美的态度。</font></p>
+<p>事实上，关于审美的无功利性，很多画家都有所探讨，这里举几个例子。</p>
+<p><font color=#87CEEB>首先是康德的例子。康德有著名的三大批判，其中的“判断力批判”就是重点探讨了美学问题，他提出审美本质的四大契机（其实就是四大方面），这里提两个。</font></p>
+<p><font color=#87CEEB>1.无目的的合目的性。</font><font color=#FF9911>康德的思考比起简单的无功利更为辩证。无目的的就是上面说的无功利。合目的性意思是，人类的任何行动其实都是为了满足某种目的，只是审美的目的是为了满足更高的精神需求，而不是一般的功利。</font></p>
+<p><font color=#87CEEB>2.无概念而具有普遍性。</font><font color=#FF9911>无概念指的是美是不存在客观定义的，不像物理学数学那些对东西都有精确的定义；普遍性指的是一种主观普遍性，就是我认为美的东西，我实际是期望别人都认同这是美的。</font></p>
+<p><font color=#87CEEB>而后是黑格尔的例子。黑格尔对于审美也有两句著名的话。</font></p>
+<p><font color=#87CEEB>1.美是人本质力量的对象化。</font><font color=#FF9911>什么是本质力量？本质力量就是人区别于其它动物的品质。他在《美学》中举了一个例子，一个小男孩打水漂，看到水漂在上面花样飞跃，觉得非常自豪。这个过程实际上是他对自己本质力量的欣赏，这种力量的体现是需要外在事物呈现的。艺术创作同样也是，我们欣赏一幅画，其实是在欣赏人类的伟大（画是人本质力量的对象化），欣赏自己的画也是在欣赏自己的本质力量。</font></p>
+<p><font color=#87CEEB>2.美是理念的感性显现。</font></p>
+<p><font color=#FF9911>先说什么是理念。理念这一概念源自于西方哲学鼻祖柏拉图，所以需要从他那讲起。柏拉图的理论中有两个著名的比喻：洞喻和床喻。这里就重点讲讲洞喻。</font></p>
+<p><font color=#FF9911>洞喻指的是，设想在一个地穴中有一批囚徒；他们自小呆在那里，被锁链束缚，不能转头，只能看面前洞壁上的影子。囚徒自然地认为影子是惟一真实的事物。如果他们中的一个囚徒碰巧获释，转过头来看到了火光与物体，他最初会感到眩晕（就像才从电影院走出来一样），但是没有关系，他会慢慢适应。此时他看到有路可走，便会逐渐走出洞穴，看到阳光下的真实世界，此时，他会意识到以前所生活的世界只不过是一个洞穴，而以前所认为的真实事物也只不过是影像而已。他可以选择返回洞穴世界，也可以选择继续留在真实世界，但是如果回到洞穴世界，同伴们不过会认为他在胡言乱语，根本不会相信，甚至去杀死他。</font></p>
+<p><font color=#FF9911>在这个比喻里，洞穴世界就是现象世界，洞外世界就是本质世界。我们看到一个现象，背后一定有一个本质。可以认为这个本质，就是理念。</font></p>
+<p><font color=#FF9911>理解了理念后，再来理解一下这句话。为什么说是理念的感性显现呢？在柏拉图的理论中，我们只能看到现象，其实是看不到本质的。黑格尔认为，只有美能让这个理念世界以一种非常感性的方式存在。创作小说这些，描写的其实不是具体的一个人，创作的其实是一个理念世界，只有理念世界才能让所有人看了都产生共鸣。好的作品，一定是反映某种社会规律的，是反映本质的理念性的东西。</font></p>
+<h4 id="2-维度二：语言、符号"><a href="#2-维度二：语言、符号" class="headerlink" title="2.维度二：语言、符号"></a>2.维度二：语言、符号</h4><p>维度一区分的仅仅是艺术和非艺术，而无法区分文学和非文学（音乐、绘画这些也都具有审美特征）。文学区分于这些的一大特征是语言符号（音乐用音符表达、绘画用图像表达，媒介不一样）。所以这里重点讨论一下语言。</p>
+<h5 id="（1）语言的基本特征"><a href="#（1）语言的基本特征" class="headerlink" title="（1）语言的基本特征"></a>（1）语言的基本特征</h5><p><font color=#87CEEB>1.语言是一个符号系统。</font></p>
+<p>瑞士著名语言学家索绪尔在《普通语言学教程》中，以<strong>二象对立</strong>的方式提出了很多关于语言的概念。</p>
+<p><font color=#00C957>1.1 能指、所指</font></p>
+<p><font color=#FF9911>能指：符号本身；</font></p>
+<p><font color=#FF9911>所指：符号代称对象</font></p>
+<p><font color=#FF9911>例如我说“葡萄”，这两个字是能指，而实际存在的那个葡萄是所指。能指和所指之间的联系是存在任意性的，比如我非以红灯符号作为通行的含义，也是可以的。但这个联系必须约定俗成，大家都能理解。</font></p>
+<p><font color=#00C957>1.2 语言、言语</font></p>
+<p><font color=#FF9911>语言：词汇系统、语法系统；</font></p>
+<p><font color=#FF9911>言语：日常的个体语言活动</font></p>
+<p><font color=#FF9911>我说的每一句话都是言语。而你之所以能听懂，是因为这些言语都遵循了一定的语法规则，这个规则就叫语言。</font></p>
+<p><font color=#00C957>1.3 组合、聚合</font></p>
+<p><font color=#FF9911>组合：横向的句段关系；</font></p>
+<p><font color=#FF9911>聚合：纵向的联想关系</font></p>
+<p><font color=#FF9911>用下面一张图来看。</font></p>
+<img src="https://s2.loli.net/2023/04/25/ZkohXYM2jAbDvUd.png" style="zoom:50%;" >
+
+<p>罗兰·巴特则在《神话学》中，对上述的能指所指作了进一步阐述。他认为索绪尔的能指所指只是一级符号系统，并将其展开为了二级符号系统。</p>
+<img src="https://s2.loli.net/2023/04/25/2XItJYa1EzKonSx.png" style="zoom:50%;" >
+
+<p><font color=#FF9911>上图中rose和玫瑰花构成了能指所指，这个是一级符号系统。这个一级符号系统本身又构成了能指，所指为爱情。这个过程加入了文化要素。这种文化关系会随着时代而变化。</font></p>
+<p><strong>语言本身就是一个世界，是一个符号的世界</strong>。<font color=#FF9911>中国和西方有一个区别，中国文字和读音是分开的，西方例如英语文字和读音是一体的（你看着一个单词就知道怎么读）。这种差异也导致了中国文化的一个特殊性，即读音和文字有两套系统，造成了符号本身的含义越来越多。</font></p>
+<p><font color=#FF9911>例如，菊花这一符号，从屈原时期“朝饮木兰之坠露兮，夕餐秋菊之落英”代表高尚的品格，到东晋陶渊明“采菊东篱下，悠然见南山”的归隐，到唐代孟浩然“待到重阳日，还来就菊花”的重阳节象征，到杜甫的“丛菊两开他日泪，孤舟一系故园心”的悠悠岁月，到唐末黄巢的”冲天香阵透长安，满城尽带黄金甲”的冲天杀气，再到明朝时的梅兰竹菊四君子，符号的含义越来越多。有句话叫“唐后无典”，唐朝后的诗歌看似衰弱了，其实不是因为文人创作能力弱了，而是符号的文化含义叠加到了一定程度无法再往上的结果。</font></p>
+<p><strong>第一节课暂时到这，先歇一歇_(:3」∠)_</strong></p>
+<ol start="3">
+<li></li>
+</ol>
 ]]></content>
       <categories>
-        <category>计算机网络</category>
+        <category>文学理论</category>
       </categories>
       <tags>
-        <tag>计算机网络</tag>
-        <tag>计网基础</tag>
+        <tag>文学理论</tag>
+        <tag>课程笔记</tag>
       </tags>
   </entry>
 </search>
