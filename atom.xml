@@ -6,7 +6,7 @@
   <link href="https://usaki622.github.io/atom.xml" rel="self"/>
   
   <link href="https://usaki622.github.io/"/>
-  <updated>2023-05-07T15:38:00.071Z</updated>
+  <updated>2023-05-07T14:06:03.038Z</updated>
   <id>https://usaki622.github.io/</id>
   
   <author>
@@ -15,31 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>【仿B站项目】番外01-RESTful规范简单理解</title>
-    <link href="https://usaki622.github.io/2023/05/07/017003/"/>
-    <id>https://usaki622.github.io/2023/05/07/017003/</id>
-    <published>2023-05-07T15:37:08.000Z</published>
-    <updated>2023-05-07T15:38:00.071Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一、什么是API（应用程序接口）&quot;&gt;&lt;a href=&quot;#一、什么是API（应用程序接口）&quot; class=&quot;headerlink&quot; title=&quot;一、什么是API（应用程序接口）&quot;&gt;&lt;/a&gt;一、什么是API（应用程序接口）&lt;/h2&gt;&lt;p&gt;Application</summary>
-        
-      
-    
-    
-    
-    <category term="项目-仿B站" scheme="https://usaki622.github.io/categories/%E9%A1%B9%E7%9B%AE-%E4%BB%BFB%E7%AB%99/"/>
-    
-    
-    <category term="仿B站项目" scheme="https://usaki622.github.io/tags/%E4%BB%BFB%E7%AB%99%E9%A1%B9%E7%9B%AE/"/>
-    
-  </entry>
   
   <entry>
     <title></title>
