@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>梦开始的地方</title>
+    <url>/2023/04/16/00-start/</url>
+    <content><![CDATA[<h2 id="这里是世界的起源"><a href="#这里是世界的起源" class="headerlink" title="这里是世界的起源"></a>这里是世界的起源</h2>]]></content>
+  </entry>
+  <entry>
     <title>【计网】基础篇-TCP/IP网络模型？</title>
     <url>/2023/04/18/014001/</url>
     <content><![CDATA[<h2 id="一、网络模型"><a href="#一、网络模型" class="headerlink" title="一、网络模型"></a>一、网络模型</h2><h3 id="何为网络模型？"><a href="#何为网络模型？" class="headerlink" title="何为网络模型？"></a>何为网络模型？</h3><p>网络模型指的是对计算机网络进行抽象和概括，以便更好地理解网络的工作原理和组成部分。网络模型通常分为两种：<strong>OSI模型和TCP&#x2F;IP模型</strong>。两者都是分层模型，将计算机网络拆分为不同的层次。</p>
@@ -58,9 +63,42 @@
       </tags>
   </entry>
   <entry>
-    <title>梦开始的地方</title>
-    <url>/2023/04/16/00-start/</url>
-    <content><![CDATA[<h2 id="这里是世界的起源"><a href="#这里是世界的起源" class="headerlink" title="这里是世界的起源"></a>这里是世界的起源</h2>]]></content>
+    <title>【左神】01-贪心算法深度剖析</title>
+    <url>/2023/04/18/016001/</url>
+    <content><![CDATA[<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><p>可以认为，贪心算法是一种<strong>最为贴合自然智慧</strong>的算法。也就是说，贪心算法有时候表现上就是一种常识性的推导，这使得你即使使用了贪心算法通过了题目，也无法意识到自己其实使用了贪心算法。</p>
+<p><em><strong>（上面说得有点玄学，题练多了就会有感觉了）</strong></em></p>
+<p><img src="https://s2.loli.net/2023/04/18/LOZuzIskclYEX8D.jpg" style="zoom: 50%;" ></img></p>
+<p>贪心算法采用一种局部最功利的标准，总是能做出在当前看来最好的选择。它通过每次选择当前最优解，从而得到全局最优解。</p>
+<p>举个简单的例子，在一堆钱中拿走十张，想要最终结果最大，应该如何拿呢？答案就是每一次都拿走当前金额最大的那张。每次拿走最大那张就是局部最优，通过局部最优达到最终结果最大的整体最优。这也同上述所说，非常符合我们的常识性推导。</p>
+<p>贪心算法的难度是在于证明有效性，就是证明局部最优可以得到全局最优。这一点的严格证明较为复杂，需要较高的数学水平，同时证明方法也不具有一致性，需要视具体题目而定。<del>由于本人的数学水平已经到达无药可救的地步，也无法涉及如此深的学习深度，</del>仅就面试做题角度而言，暂时无需涉及到如此深度，因此在实际做题过程中，只需要根据题目想出对应的贪心策略，并且自己无法举出反例，就可以大胆尝试该方法。</p>
+<h2 id="2-贪心算法求解思路"><a href="#2-贪心算法求解思路" class="headerlink" title="2.贪心算法求解思路"></a>2.贪心算法求解思路</h2><p>首先要注意，贪心算法并没有固定的套路，不存在什么套路可以一眼看出来此题为贪心算法题。</p>
+<p>除此之外，关于贪心策略的寻找，也不存在固定的套路。<del><em><strong>怎么什么套路都没有啊喂(ﾉ ○ Д ○)ﾉ</strong></em></del></p>
+<p>贪心算法的学习只能依靠<strong>增加阅历和经验</strong>，在长期实战中逐步体会。</p>
+<p>关于其具体思路，只能举出一个大概的框架：</p>
+<ul>
+<li>分析具体业务；</li>
+<li>根据业务举出不同的贪心策略；</li>
+<li>寻找反例，将没有反例的那个视作正确的贪心策略，进行求解；</li>
+</ul>
+<p>切记，在面试中，不要纠结于贪心策略的证明！</p>
+<h2 id="3-贪心算法实战"><a href="#3-贪心算法实战" class="headerlink" title="3.贪心算法实战"></a>3.贪心算法实战</h2><h3 id="3-1-会议安排问题"><a href="#3-1-会议安排问题" class="headerlink" title="3.1 会议安排问题"></a>3.1 会议安排问题</h3><p><strong>题目：</strong>一些项目要占用一个会议室宣讲，会议室不能同时容纳两个项目宣讲。给你每个项目的开始时间和结束时间，你来安排宣讲的日程，要求会议室进行宣讲的场数最多。</p>
+<p>请返回最多的宣讲场次。</p>
+<p><strong>思路：</strong></p>
+<p>首先想想可以用哪些安排策略。</p>
+<p>1.根据开始时间，先开始的先安排；</p>
+<p>2.根据持续时间，持续时间短的先安排；</p>
+<p>3.根据结束时间，先结束的先安排；</p>
+<p>1和2的话很容易想出反例。（1中，第一场会议持续一百万个小时，后面有一堆持续时间1分钟的会议；2中，10:00~12:00,12:00~14:00,11:59~12:01）。3的话似乎一时半会儿想不出来，那就用3！</p>
+<p><strong>代码框架：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">// 会议</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Program</span> &#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> start; <span class="comment">// 开始时间</span></span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> end; <span class="comment">// 结束时间</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">Program</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">			<span class="built_in">this</span>.start = start;</span><br><span class="line">			<span class="built_in">this</span>.end = end;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">programAssign</span><span class="params">(Program[] program)</span> &#123;</span><br><span class="line">        Arrays.sort(program)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>【仿B站项目】01-从搭建环境开始</title>
@@ -165,44 +203,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【左神】01-贪心算法深度剖析</title>
-    <url>/2023/04/18/016001/</url>
-    <content><![CDATA[<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><p>可以认为，贪心算法是一种<strong>最为贴合自然智慧</strong>的算法。也就是说，贪心算法有时候表现上就是一种常识性的推导，这使得你即使使用了贪心算法通过了题目，也无法意识到自己其实使用了贪心算法。</p>
-<p><em><strong>（上面说得有点玄学，题练多了就会有感觉了）</strong></em></p>
-<p><img src="https://s2.loli.net/2023/04/18/LOZuzIskclYEX8D.jpg" style="zoom: 50%;" ></img></p>
-<p>贪心算法采用一种局部最功利的标准，总是能做出在当前看来最好的选择。它通过每次选择当前最优解，从而得到全局最优解。</p>
-<p>举个简单的例子，在一堆钱中拿走十张，想要最终结果最大，应该如何拿呢？答案就是每一次都拿走当前金额最大的那张。每次拿走最大那张就是局部最优，通过局部最优达到最终结果最大的整体最优。这也同上述所说，非常符合我们的常识性推导。</p>
-<p>贪心算法的难度是在于证明有效性，就是证明局部最优可以得到全局最优。这一点的严格证明较为复杂，需要较高的数学水平，同时证明方法也不具有一致性，需要视具体题目而定。<del>由于本人的数学水平已经到达无药可救的地步，也无法涉及如此深的学习深度，</del>仅就面试做题角度而言，暂时无需涉及到如此深度，因此在实际做题过程中，只需要根据题目想出对应的贪心策略，并且自己无法举出反例，就可以大胆尝试该方法。</p>
-<h2 id="2-贪心算法求解思路"><a href="#2-贪心算法求解思路" class="headerlink" title="2.贪心算法求解思路"></a>2.贪心算法求解思路</h2><p>首先要注意，贪心算法并没有固定的套路，不存在什么套路可以一眼看出来此题为贪心算法题。</p>
-<p>除此之外，关于贪心策略的寻找，也不存在固定的套路。<del><em><strong>怎么什么套路都没有啊喂(ﾉ ○ Д ○)ﾉ</strong></em></del></p>
-<p>贪心算法的学习只能依靠<strong>增加阅历和经验</strong>，在长期实战中逐步体会。</p>
-<p>关于其具体思路，只能举出一个大概的框架：</p>
-<ul>
-<li>分析具体业务；</li>
-<li>根据业务举出不同的贪心策略；</li>
-<li>寻找反例，将没有反例的那个视作正确的贪心策略，进行求解；</li>
-</ul>
-<p>切记，在面试中，不要纠结于贪心策略的证明！</p>
-<h2 id="3-贪心算法实战"><a href="#3-贪心算法实战" class="headerlink" title="3.贪心算法实战"></a>3.贪心算法实战</h2><h3 id="3-1-会议安排问题"><a href="#3-1-会议安排问题" class="headerlink" title="3.1 会议安排问题"></a>3.1 会议安排问题</h3><p><strong>题目：</strong>一些项目要占用一个会议室宣讲，会议室不能同时容纳两个项目宣讲。给你每个项目的开始时间和结束时间，你来安排宣讲的日程，要求会议室进行宣讲的场数最多。</p>
-<p>请返回最多的宣讲场次。</p>
-<p><strong>思路：</strong></p>
-<p>首先想想可以用哪些安排策略。</p>
-<p>1.根据开始时间，先开始的先安排；</p>
-<p>2.根据持续时间，持续时间短的先安排；</p>
-<p>3.根据结束时间，先结束的先安排；</p>
-<p>1和2的话很容易想出反例。（1中，第一场会议持续一百万个小时，后面有一堆持续时间1分钟的会议；2中，10:00~12:00,12:00~14:00,11:59~12:01）。3的话似乎一时半会儿想不出来，那就用3！</p>
-<p><strong>代码框架：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">// 会议</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Program</span> &#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> start; <span class="comment">// 开始时间</span></span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> end; <span class="comment">// 结束时间</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">Program</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">			<span class="built_in">this</span>.start = start;</span><br><span class="line">			<span class="built_in">this</span>.end = end;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">programAssign</span><span class="params">(Program[] program)</span> &#123;</span><br><span class="line">        Arrays.sort(program)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《为了养老金去异界存八万金》—— 有一定乐趣的搞笑作品</title>
     <url>/2023/05/22/021001/</url>
     <content><![CDATA[<p style="text-indent:2em;">我对于该作品的观感是比较微妙的。简单来说，对于该作品，我开始并没有什么好感度。在看完第一集后，我实际上是一头雾水的，内心只能用“我看了个什么玩意”来形容。然而当我渐渐接受了这种风格后，该作品对于我产生了一种吸引力，使我感到有一些乐趣，一些情节也能意外戳中我的笑点。<font color=#FF9911>当然，这些感受很可能只是我个人的体会，本篇观后感也并非想让大家都认同“这部作品其实很有趣”的观点，只是想要尝试探讨并分享一下这部作品是什么地方带给了我乐趣。</font></p>
@@ -231,6 +231,7 @@
 
 
 
+<p>评分：6.1&#x2F;10（标准参照bangumi）</p>
 <p>PS：FUNA的另一部作品《我，不是说了能力要平均值么！》也是类似的风格，不过个人认为整体比这一作要强一些，若是对这番感兴趣的，也可以去看一下那一部作品！</p>
 ]]></content>
       <categories>
