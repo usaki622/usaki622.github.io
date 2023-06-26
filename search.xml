@@ -63,34 +63,75 @@
       </tags>
   </entry>
   <entry>
-    <title>【左神】01-贪心算法深度剖析</title>
-    <url>/2023/04/18/016001/</url>
-    <content><![CDATA[<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><p>可以认为，贪心算法是一种<strong>最为贴合自然智慧</strong>的算法。也就是说，贪心算法有时候表现上就是一种常识性的推导，这使得你即使使用了贪心算法通过了题目，也无法意识到自己其实使用了贪心算法。</p>
-<p><em><strong>（上面说得有点玄学，题练多了就会有感觉了）</strong></em></p>
-<p><img src="https://s2.loli.net/2023/04/18/LOZuzIskclYEX8D.jpg" style="zoom: 50%;" ></img></p>
-<p>贪心算法采用一种局部最功利的标准，总是能做出在当前看来最好的选择。它通过每次选择当前最优解，从而得到全局最优解。</p>
-<p>举个简单的例子，在一堆钱中拿走十张，想要最终结果最大，应该如何拿呢？答案就是每一次都拿走当前金额最大的那张。每次拿走最大那张就是局部最优，通过局部最优达到最终结果最大的整体最优。这也同上述所说，非常符合我们的常识性推导。</p>
-<p>贪心算法的难度是在于证明有效性，就是证明局部最优可以得到全局最优。这一点的严格证明较为复杂，需要较高的数学水平，同时证明方法也不具有一致性，需要视具体题目而定。<del>由于本人的数学水平已经到达无药可救的地步，也无法涉及如此深的学习深度，</del>仅就面试做题角度而言，暂时无需涉及到如此深度，因此在实际做题过程中，只需要根据题目想出对应的贪心策略，并且自己无法举出反例，就可以大胆尝试该方法。</p>
-<h2 id="2-贪心算法求解思路"><a href="#2-贪心算法求解思路" class="headerlink" title="2.贪心算法求解思路"></a>2.贪心算法求解思路</h2><p>首先要注意，贪心算法并没有固定的套路，不存在什么套路可以一眼看出来此题为贪心算法题。</p>
-<p>除此之外，关于贪心策略的寻找，也不存在固定的套路。<del><em><strong>怎么什么套路都没有啊喂(ﾉ ○ Д ○)ﾉ</strong></em></del></p>
-<p>贪心算法的学习只能依靠<strong>增加阅历和经验</strong>，在长期实战中逐步体会。</p>
-<p>关于其具体思路，只能举出一个大概的框架：</p>
+    <title>【左神】01-认识算法</title>
+    <url>/2023/06/26/016001/</url>
+    <content><![CDATA[<p><strong>程序 &#x3D; 数据结构 + 算法</strong></p>
+<h2 id="一、算法简介"><a href="#一、算法简介" class="headerlink" title="一、算法简介"></a>一、算法简介</h2><h3 id="（一）核心指标"><a href="#（一）核心指标" class="headerlink" title="（一）核心指标"></a>（一）核心指标</h3><p>评估算法优劣的核心指标是什么？</p>
 <ul>
-<li>分析具体业务；</li>
-<li>根据业务举出不同的贪心策略；</li>
-<li>寻找反例，将没有反例的那个视作正确的贪心策略，进行求解；</li>
+<li>时间复杂度（流程决定）</li>
+<li>额外空间复杂度（流程决定）</li>
+<li>常数项时间（实现细节决定）</li>
 </ul>
-<p>切记，在面试中，不要纠结于贪心策略的证明！</p>
-<h2 id="3-贪心算法实战"><a href="#3-贪心算法实战" class="headerlink" title="3.贪心算法实战"></a>3.贪心算法实战</h2><h3 id="3-1-会议安排问题"><a href="#3-1-会议安排问题" class="headerlink" title="3.1 会议安排问题"></a>3.1 会议安排问题</h3><p><strong>题目：</strong>一些项目要占用一个会议室宣讲，会议室不能同时容纳两个项目宣讲。给你每个项目的开始时间和结束时间，你来安排宣讲的日程，要求会议室进行宣讲的场数最多。</p>
-<p>请返回最多的宣讲场次。</p>
-<p><strong>思路：</strong></p>
-<p>首先想想可以用哪些安排策略。</p>
-<p>1.根据开始时间，先开始的先安排；</p>
-<p>2.根据持续时间，持续时间短的先安排；</p>
-<p>3.根据结束时间，先结束的先安排；</p>
-<p>1和2的话很容易想出反例。（1中，第一场会议持续一百万个小时，后面有一堆持续时间1分钟的会议；2中，10:00~12:00,12:00~14:00,11:59~12:01）。3的话似乎一时半会儿想不出来，那就用3！</p>
-<p><strong>代码框架：</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">// 会议</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Program</span> &#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> start; <span class="comment">// 开始时间</span></span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> end; <span class="comment">// 结束时间</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">Program</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">			<span class="built_in">this</span>.start = start;</span><br><span class="line">			<span class="built_in">this</span>.end = end;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">programAssign</span><span class="params">(Program[] program)</span> &#123;</span><br><span class="line">        Arrays.sort(program)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面来一个一个介绍。</p>
+<h3 id="（二）时间复杂度"><a href="#（二）时间复杂度" class="headerlink" title="（二）时间复杂度"></a>（二）时间复杂度</h3><p>首先了解什么是常数时间的操作：</p>
+<p><font color=#00C957>如果一个操作的执行时间不以具体样本量为转移，每次执行时间都是固定时间。称这样的操作为常数时间的操作。</font></p>
+<p><font color=#00C957>*比方说，算数运算（+ - * &#x2F;），位运算（&gt;&gt; &gt;&gt;&gt; &lt;&lt;），赋值操作等，都属于常数时间的操作。*</font></p>
+<p>时间复杂度可以认为，就是<font color=#00C957>确定算法流程的总操作数量与样本数量之间的表达式关系，并且只看表达式最高阶项的部分。</font></p>
+<p><font color=#FF9911>其具体的流程可以这样：</font></p>
+<blockquote>
+<p>1，想象该算法流程所处理的数据状况，要按照<strong>最差情况</strong>来。</p>
+<p>2，把整个流程彻底拆分为一个个基本动作，保证每个动作都是常数时间的操作。</p>
+<p>3，如果数据量为N，看看基本动作的数量和N是什么关系。</p>
+<p>4，当完成了表达式的建立，只要把最高阶项留下即可。低阶项都去掉，高阶项的系数也去掉。记为：O(忽略掉系数的高阶项)</p>
+</blockquote>
+<p><font color=#DA70D6>在后面的一系列实践操作中，就会很容易理解了</font></p>
+<h3 id="（三）额外空间复杂度"><a href="#（三）额外空间复杂度" class="headerlink" title="（三）额外空间复杂度"></a>（三）额外空间复杂度</h3><p>这个主要注意<strong>额外</strong>两个字。</p>
+<p>在实现算法流程的过程中，我们需要开辟一些空间来支持算法流程。<font color=#87CEEB>其中必要的空间不会算在额外空间复杂度里（例如，我的目标是复制一个数组，那我需要new一个数组，这段空间不算在额外空间复杂度里），只有与实现目标无关的才被成为额外空间复杂度。</font></p>
+<h3 id="（四）常数项时间"><a href="#（四）常数项时间" class="headerlink" title="（四）常数项时间"></a>（四）常数项时间</h3><p>我们会发现，时间复杂度这个指标，是忽略低阶项和所有常数系数的。</p>
+<p>难道同样时间复杂度的流程，在实际运行时候就一样的好吗？当然不是。</p>
+<p>时间复杂度只是一个很重要的指标而已。如果两个时间复杂度一样的算法，你还要去在时间上拼优劣，就进入到拼常数时间的阶段，简称<strong>拼常数项</strong>。</p>
+<p>那么，我们如何拼常数项呢？</p>
+<p>放弃理论分析，生成随机数据直接测。</p>
+<p>为什么不去理论分析？</p>
+<p>不是不能纯分析，而是没必要。因为不同常数时间的操作，虽然都是固定时间，但还是有快慢之分的。</p>
+<p>比如，位运算的常数时间原小于算术运算的常数时间，这两个运算的常数时间又远小于数组寻址的时间。</p>
+<p>所以如果纯理论分析，往往会需要非常多的分析过程。都已经到了具体细节的程度，莫不如交给实验数据好了。</p>
+<h3 id="（五）算法的最优解"><a href="#（五）算法的最优解" class="headerlink" title="（五）算法的最优解"></a>（五）算法的最优解</h3><p>那么，在面试中，一个问题的最优解是什么意思呢？</p>
+<p><font color=#FF9911>首先时间复杂度尽可能低，然后在此基础上空间复杂度尽可能低。</font></p>
+<p><font color=#FF9911>一般说起最优解都是忽略掉常数项这个因素的，因为这个因素只决定了实现层次的优化和考虑，而和怎么解决整个问题的思想无关。</font></p>
+<p><em><strong>上面这段我理解的话，就是比方说最常见的二分排序找mid，是用(L + R) &#x2F; 2还是用L + ((R - L) &gt;&gt; 1)，是实现层次的优化，与二分排序的整体思想无关</strong></em></p>
+<h3 id="（六）常见的时间复杂度"><a href="#（六）常见的时间复杂度" class="headerlink" title="（六）常见的时间复杂度"></a>（六）常见的时间复杂度</h3><p><em><strong>我们以后都会遇到的</strong></em></p>
+<p>O(1) &gt; O(logN) &gt;O(N)&gt; O(N * logN)&gt; O(N ^ 2)&gt; O(2 ^ N)&gt; O(N)</p>
+<h2 id="二、算法和数据结构学习"><a href="#二、算法和数据结构学习" class="headerlink" title="二、算法和数据结构学习"></a>二、算法和数据结构学习</h2><p>算法和数据结构学习的大脉络：</p>
+<p>1.知道怎么算的算法</p>
+<p>2.知道怎么试的算法</p>
+<p><em><strong>这个我暂时还没有很好的理解。知道怎么算可能就是学习每个算法的具体流程，知道怎么试大概是面对陌生场景无法套用算法时该如何尝试解题？</strong></em></p>
+<h2 id="三、认识对数器"><a href="#三、认识对数器" class="headerlink" title="三、认识对数器"></a>三、认识对数器</h2><p><em><strong>对数器的说法我只在左神这里看到过，莫非是左神独创？tql！</strong></em></p>
+<p><font color=#FF9911>首先让我们设想一下以下的场景：</font></p>
+<blockquote>
+<p>你在网上找到了某个公司的面试题，你想了好久，但是你找不到在线测试，你好心烦……</p>
+</blockquote>
+<blockquote>
+<p>你和朋友交流面试题，你想了好久，感觉自己会做，但是你找不到在线测试，你好心烦…….</p>
+</blockquote>
+<blockquote>
+<p>你在网上做笔试，前几个测试用例都过了，突然一个巨大无比的数据量来了，结果你的代码报错了，如此大的数据量你根本看不出哪里错了，你好心烦…….</p>
+</blockquote>
+<p>有了对数器，你就不再会有这些困难了。</p>
+<p>让我们看看左神是怎么定义对数器的：</p>
+<blockquote>
+<ol>
+<li>准备你想要测试的方法a</li>
+<li>实现一个复杂度不好，但是容易实现的方法b</li>
+<li>实现一个随机样本产生器</li>
+<li>把方法a和方法b跑相同的随机样本，看看得到的结果是否一样</li>
+<li>如果有一个随机样本使得对比结果不一致，打印样本进行人工干预，改对方法a和方法b</li>
+<li>当样本数量很多，测试对比依然正确，可以确定方法a已经正确</li>
+</ol>
+</blockquote>
+<p><em><strong>我理解其实就是通过复杂度高但是绝对正确的方法验证你的算法正确不正确。</strong></em></p>
+<p><font color=#FF9911>为了避免太抽象，还是以冒泡排序为例，上代码看看例子，最下面那堆就是对数器：</font></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bean.bubble_sort;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BubbleSorted</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">bubbleSort</span><span class="params">(<span class="type">int</span> arr[])</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> arr.length-<span class="number">1</span>; end &gt; <span class="number">0</span>; end--) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; end; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[i] &gt; arr[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                    swap(arr, i, i+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[left];</span><br><span class="line">        arr[left] = arr[right];</span><br><span class="line">        arr[right] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//正确的排序方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">rightSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        Arrays.sort(arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成一个随机大小，最大数随机的数组</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] generateRandomArray(<span class="type">int</span> maxSize, <span class="type">int</span> maxNum) &#123;</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[(<span class="type">int</span>) ((maxSize+<span class="number">1</span>) * Math.random())];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            arr[i] = (<span class="type">int</span>) (Math.random()*(maxNum+<span class="number">1</span>)) - (<span class="type">int</span>)(Math.random()*maxNum);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//复制当前数组的一个样本</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] copyArray(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[] newArray = <span class="keyword">new</span> <span class="title class_">int</span>[arr.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            newArray[i] = arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newArray;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断两个数组是否完全相同</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isEquals</span><span class="params">(<span class="type">int</span>[] arr1, <span class="type">int</span>[] arr2)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr1.length != arr2.length) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (arr1 != <span class="literal">null</span> &amp;&amp; arr2 == <span class="literal">null</span> || arr1 == <span class="literal">null</span> &amp;&amp; arr2 != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr1.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr1[i] != arr2[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (arr1 == <span class="literal">null</span> &amp;&amp; arr2 == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印数组</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printArray</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.print(arr[i]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">testTims</span> <span class="operator">=</span> <span class="number">10000</span>;<span class="comment">//测试次数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">maxSize</span> <span class="operator">=</span> <span class="number">20</span>;<span class="comment">//最大测试容量</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">maxNum</span> <span class="operator">=</span> <span class="number">20</span>;<span class="comment">//最大测试数据</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">euqals</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; testTims; i++) &#123;</span><br><span class="line">            <span class="type">int</span>[] arr1 = generateRandomArray(maxSize,maxNum);</span><br><span class="line">            <span class="type">int</span>[] arr2 = copyArray(arr1);<span class="comment">//这两个数组除了</span></span><br><span class="line">            <span class="comment">//数值相同内存地址完全没关系，请看copyArray()方法实现</span></span><br><span class="line">            bubbleSort(arr1);<span class="comment">//用自己的算法排序</span></span><br><span class="line">            rightSort(arr2);<span class="comment">//用java.util.Arrays包的排序算法排序</span></span><br><span class="line">            <span class="keyword">if</span> (!isEquals(arr1,arr2)) &#123;<span class="comment">//比较是否相同</span></span><br><span class="line">                euqals = <span class="literal">false</span>;<span class="comment">//一旦有不一样的值就设为false;</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(euqals ? <span class="string">&quot;Success:恭喜你！没毛病！&quot;</span> : <span class="string">&quot;Error：抱歉，有错误&quot;</span> );<span class="comment">//没错就恭喜，有错就报错</span></span><br><span class="line">        <span class="type">int</span>[] newArr = generateRandomArray(maxSize, maxNum);</span><br><span class="line">        printArray(newArr);<span class="comment">//没排序的数组打印出来</span></span><br><span class="line">        bubbleSort(newArr);<span class="comment">//排序后</span></span><br><span class="line">        printArray(newArr);<span class="comment">//再次打印，程序员自己看看有没有毛病</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -98,6 +139,7 @@
       </categories>
       <tags>
         <tag>算法</tag>
+        <tag>左神</tag>
       </tags>
   </entry>
   <entry>
@@ -200,6 +242,45 @@
       </categories>
       <tags>
         <tag>仿B站项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【左神】10-贪心算法深度剖析</title>
+    <url>/2023/04/18/016010/</url>
+    <content><![CDATA[<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><p>可以认为，贪心算法是一种<strong>最为贴合自然智慧</strong>的算法。也就是说，贪心算法有时候表现上就是一种常识性的推导，这使得你即使使用了贪心算法通过了题目，也无法意识到自己其实使用了贪心算法。</p>
+<p><em><strong>（上面说得有点玄学，题练多了就会有感觉了）</strong></em></p>
+<p><img src="https://s2.loli.net/2023/04/18/LOZuzIskclYEX8D.jpg" style="zoom: 50%;" ></img></p>
+<p>贪心算法采用一种局部最功利的标准，总是能做出在当前看来最好的选择。它通过每次选择当前最优解，从而得到全局最优解。</p>
+<p>举个简单的例子，在一堆钱中拿走十张，想要最终结果最大，应该如何拿呢？答案就是每一次都拿走当前金额最大的那张。每次拿走最大那张就是局部最优，通过局部最优达到最终结果最大的整体最优。这也同上述所说，非常符合我们的常识性推导。</p>
+<p>贪心算法的难度是在于证明有效性，就是证明局部最优可以得到全局最优。这一点的严格证明较为复杂，需要较高的数学水平，同时证明方法也不具有一致性，需要视具体题目而定。<del>由于本人的数学水平已经到达无药可救的地步，也无法涉及如此深的学习深度，</del>仅就面试做题角度而言，暂时无需涉及到如此深度，因此在实际做题过程中，只需要根据题目想出对应的贪心策略，并且自己无法举出反例，就可以大胆尝试该方法。</p>
+<h2 id="2-贪心算法求解思路"><a href="#2-贪心算法求解思路" class="headerlink" title="2.贪心算法求解思路"></a>2.贪心算法求解思路</h2><p>首先要注意，贪心算法并没有固定的套路，不存在什么套路可以一眼看出来此题为贪心算法题。</p>
+<p>除此之外，关于贪心策略的寻找，也不存在固定的套路。<del><em><strong>怎么什么套路都没有啊喂(ﾉ ○ Д ○)ﾉ</strong></em></del></p>
+<p>贪心算法的学习只能依靠<strong>增加阅历和经验</strong>，在长期实战中逐步体会。</p>
+<p>关于其具体思路，只能举出一个大概的框架：</p>
+<ul>
+<li>分析具体业务；</li>
+<li>根据业务举出不同的贪心策略；</li>
+<li>寻找反例，将没有反例的那个视作正确的贪心策略，进行求解；</li>
+</ul>
+<p>切记，在面试中，不要纠结于贪心策略的证明！</p>
+<h2 id="3-贪心算法实战"><a href="#3-贪心算法实战" class="headerlink" title="3.贪心算法实战"></a>3.贪心算法实战</h2><h3 id="3-1-会议安排问题"><a href="#3-1-会议安排问题" class="headerlink" title="3.1 会议安排问题"></a>3.1 会议安排问题</h3><p><strong>题目：</strong>一些项目要占用一个会议室宣讲，会议室不能同时容纳两个项目宣讲。给你每个项目的开始时间和结束时间，你来安排宣讲的日程，要求会议室进行宣讲的场数最多。</p>
+<p>请返回最多的宣讲场次。</p>
+<p><strong>思路：</strong></p>
+<p>首先想想可以用哪些安排策略。</p>
+<p>1.根据开始时间，先开始的先安排；</p>
+<p>2.根据持续时间，持续时间短的先安排；</p>
+<p>3.根据结束时间，先结束的先安排；</p>
+<p>1和2的话很容易想出反例。（1中，第一场会议持续一百万个小时，后面有一堆持续时间1分钟的会议；2中，10:00~12:00,12:00~14:00,11:59~12:01）。3的话似乎一时半会儿想不出来，那就用3！</p>
+<p><strong>代码框架：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">// 会议</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Program</span> &#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> start; <span class="comment">// 开始时间</span></span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> end; <span class="comment">// 结束时间</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">Program</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">			<span class="built_in">this</span>.start = start;</span><br><span class="line">			<span class="built_in">this</span>.end = end;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">programAssign</span><span class="params">(Program[] program)</span> &#123;</span><br><span class="line">        Arrays.sort(program)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>左神</tag>
       </tags>
   </entry>
   <entry>
