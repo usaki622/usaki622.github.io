@@ -8,7 +8,7 @@
       <link href="/2023/11/24/%E3%80%90AJAX%E3%80%9101-AJAX%E5%85%A5%E9%97%A8/"/>
       <url>/2023/11/24/%E3%80%90AJAX%E3%80%9101-AJAX%E5%85%A5%E9%97%A8/</url>
       
-        <content type="html"><![CDATA[<h3 id="（五）HTTP协议-报文">（五）HTTP协议-报文</h3><p><font color=1E90FF>学习了请求报文，就知道浏览器是如何把请求发送给服务器了。</font></p><p><font color=#2E8B57>首先让我们回顾一下HTTP协议。这是一种 <strong>协议</strong> ，它规定了浏览器发送以及服务器返回内容的 <strong>格式</strong> 。在此基础上， <strong>请求报文</strong> 就是浏览器按照 HTTP 协议要求的格式，发送给服务器的内容。</font></p><p><font color=#CD950C>测试一下橘色。</font></p><p><font color=#CD5555>测试一下红色。</font></p>]]></content>
+        <content type="html"><![CDATA[<h3 id="（五）HTTP协议-报文">（五）HTTP协议-报文</h3><p><font color=1E90FF>学习了请求报文，就知道浏览器是如何把请求发送给服务器了。</font></p><p><font color=#2E8B57>首先让我们回顾一下HTTP协议。这是一种 <strong>协议</strong> ，它规定了浏览器发送以及服务器返回内容的 <strong>格式</strong> 。在此基础上， <strong>请求报文</strong> 就是浏览器按照 HTTP 协议要求的格式，发送给服务器的内容。</font></p><p><font color=#CD950C>测试一下橘色。</font></p><p><font color=#CD5555>测试一下红色。</font></p><p><font color=#A020F0>测试一下紫色。</font></p><p><font color=#A020F0>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊测试一下紫色。</font></p>]]></content>
       
       
       
